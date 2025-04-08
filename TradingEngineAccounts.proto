@@ -1,0 +1,135 @@
+syntax = "proto3";
+package cross_margin_accounts;
+import "google/protobuf/empty.proto";
+
+enum TradingEngineAccountsErrorCode{
+    AccountNotFound = 0;
+    TraderNotFound = 1;
+    NotEnoughBalance = 2;
+    ProcessIdDuplicate = 3;
+    CollateralCurrencyNotFound = 4;
+    InvalidLeverage = 5;
+    TradingGroupNotFound = 6;
+    TradingProfileNotFound = 7;
+}
+
+enum TradingEngineUpdateBalanceReason{
+    Trading = 0;
+    Deposit = 1;
+    Withdrawal = 2;
+    Transfer = 3;
+    BalanceCorrection = 4;
+}
+
+enum TradingEngineAccountsAccountHedgeMode{
+    Hedge = 0;
+    Netting = 1;
+}
+
+message TradingEngineAccountGrpcModel{
+    string Id = 1;
+    string TraderId = 2;
+    string Currency = 3;
+    double Balance = 4;
+    double Equity = 5;
+    double Margin = 6;
+    bool TradingDisabled = 7;
+    double Leverage = 8;
+    double FreeMargin = 9;
+    double MarginLvl = 10;
+    string TradingGroup = 11;
+    uint64 DateCreate = 12;
+    uint64 DateUpdate = 13;
+    string CreateProcessId = 14;
+    string LastUpdateProcessId = 15;
+    TradingEngineAccountsAccountHedgeMode HedgeMode = 16;
+    map<string, string> Metadata = 17;
+}
+
+message TradingEngineAccountsBalanceOperation{
+    string Id = 1;
+    string TraderId = 2;
+    string AccountId = 3;
+    double Delta = 4;
+    optional string Comment = 5;
+    optional string ReferenceOperationId = 6;
+    int64 Date = 7;
+    double BalanceAfter = 8;
+    TradingEngineUpdateBalanceReason Type = 9;
+    string ProcessId = 10;
+}
+
+message CreateAccountGrpcRequest{
+    string TraderId = 1;
+    string AccountId = 2;
+    double Leverage = 3;
+    string Currency = 4;
+    string ProcessId = 5;
+    string TradingGroup = 6;
+    map<string, string> Metadata = 7;
+}
+
+message CreateAccountGrpcResponse{
+    oneof CreateResult{
+        TradingEngineAccountsErrorCode ErrorCode = 1;
+        TradingEngineAccountGrpcModel Account = 2;
+    }
+}
+
+message GetClientAccountGrpcRequest{
+    string TraderId = 1;
+    string AccountId = 2;
+}
+
+message GetTraderAccountsGrpcRequest{
+    string TraderId = 1;
+    string AccountId = 2;
+}
+
+message UpdateAccountGrpcRequest{
+    string TraderId = 1;
+    string AccountId = 2; 
+    optional bool TradingDisabled = 3;
+    optional string TradingGroup = 4;
+    optional double Leverage = 5;
+    string ProcessId = 6;
+}
+
+message UpdateAccountGrpcResponse{
+    oneof UpdateResult{
+        TradingEngineAccountsErrorCode ErrorCode = 1;
+        TradingEngineAccountGrpcModel Account = 2;
+    }
+}
+
+message UpdateAccountBalanceGrpcResponse{
+    oneof UpdateBalanceResult{
+        TradingEngineAccountsErrorCode ErrorCode = 1;
+        TradingEngineAccountGrpcModel Account = 2;
+    }
+}
+
+message UpdateAccountBalanceGrpcRequest{
+    string TraderId = 1;
+     string AccountId = 2;
+     double Delta = 3;
+     string Comment = 4;
+     string ProcessId = 5;
+     bool AllowNegativeBalance = 6;
+     TradingEngineUpdateBalanceReason Reason = 7;
+     optional string ReferenceTransactionId = 8;
+     bool SameResponseProcessId = 9;
+}
+
+
+service TradingEngineAccountsService{
+    rpc CreateAccount(CreateAccountGrpcRequest) returns (CreateAccountGrpcResponse);
+    rpc GetAllAccounts(google.protobuf.Empty) returns (stream TradingEngineAccountGrpcModel);
+    rpc GetClientAccount(GetClientAccountGrpcRequest) returns (TradingEngineAccountGrpcModel);
+    rpc GetClientAccounts(GetTraderAccountsGrpcRequest) returns (stream TradingEngineAccountGrpcModel);
+    rpc UpdateAccount(UpdateAccountGrpcRequest) returns (UpdateAccountGrpcResponse);
+    rpc UpdateBalance(UpdateAccountBalanceGrpcRequest) returns (UpdateAccountBalanceGrpcResponse);
+    rpc Ping(google.protobuf.Empty) returns (google.protobuf.Empty);
+}
+
+
