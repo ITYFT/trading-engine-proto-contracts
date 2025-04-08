@@ -1,5 +1,5 @@
 syntax = "proto3";
-package cross_margin_accounts;
+package trading_engine_accounts;
 import "google/protobuf/empty.proto";
 
 enum TradingEngineAccountsErrorCode{
