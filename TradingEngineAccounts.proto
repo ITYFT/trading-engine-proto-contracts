@@ -21,6 +21,11 @@ enum TradingEngineUpdateBalanceReason{
     BalanceCorrection = 4;
 }
 
+enum TradingEngineAccountStatus{
+    Active = 0;
+    Disabled = 1;
+}
+
 enum TradingEngineAccountsAccountHedgeMode{
     Hedge = 0;
     Netting = 1;
@@ -33,14 +38,12 @@ message TradingEngineAccountGrpcModel{
     double Balance = 4;
     double Equity = 5;
     double Margin = 6;
-    bool TradingDisabled = 7;
+    TradingEngineAccountStatus Status = 7;
     double Leverage = 8;
     double FreeMargin = 9;
     double MarginLvl = 10;
     string TradingGroup = 11;
-    uint64 DateCreate = 12;
     uint64 DateUpdate = 13;
-    string CreateProcessId = 14;
     string LastUpdateProcessId = 15;
     TradingEngineAccountsAccountHedgeMode HedgeMode = 16;
     map<string, string> Metadata = 17;
