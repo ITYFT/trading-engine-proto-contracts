@@ -116,12 +116,34 @@ message UpdateAccountBalanceGrpcRequest{
     string TraderId = 1;
      string AccountId = 2;
      double Delta = 3;
-     string Comment = 4;
+     optional string Comment = 4;
      string ProcessId = 5;
      bool AllowNegativeBalance = 6;
      TradingEngineUpdateBalanceReason Reason = 7;
      optional string ReferenceTransactionId = 8;
      bool SameResponseProcessId = 9;
+}
+
+message TransferFundsGrpcRequest{
+    string FromAccount = 1;
+    string ToAccount = 2;
+    double Amount = 3;
+    string ProcessId = 4;
+    string Comment = 5;
+}
+
+message TradingEngineSuccessTransferInfo{
+    TradingEngineAccountGrpcModel SenderAccount = 1;
+    TradingEngineAccountGrpcModel ReceiverAccount = 2;
+    TradingEngineAccountsBalanceOperation SenderOperation = 3;
+    TradingEngineAccountsBalanceOperation ReceiverOperation = 4;
+}
+
+message TransferFundsGrpcResponse{
+    oneof UpdateBalanceResult{
+        TradingEngineAccountsErrorCode ErrorCode = 1;
+        TradingEngineSuccessTransferInfo TransferInfo = 2;
+    }
 }
 
 
@@ -132,6 +154,7 @@ service TradingEngineAccountsService{
     rpc GetClientAccounts(GetTraderAccountsGrpcRequest) returns (stream TradingEngineAccountGrpcModel);
     rpc UpdateAccount(UpdateAccountGrpcRequest) returns (UpdateAccountGrpcResponse);
     rpc UpdateBalance(UpdateAccountBalanceGrpcRequest) returns (UpdateAccountBalanceGrpcResponse);
+    rpc TransferFunds(TransferFundsGrpcRequest) returns (TransferFundsGrpcResponse);
     rpc Ping(google.protobuf.Empty) returns (google.protobuf.Empty);
 }
 
