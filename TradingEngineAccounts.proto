@@ -4,13 +4,12 @@ import "google/protobuf/empty.proto";
 
 enum TradingEngineAccountsErrorCode{
     AccountNotFound = 0;
-    TraderNotFound = 1;
-    NotEnoughBalance = 2;
-    ProcessIdDuplicate = 3;
-    CollateralCurrencyNotFound = 4;
-    InvalidLeverage = 5;
-    TradingGroupNotFound = 6;
-    TradingProfileNotFound = 7;
+    ReceiverAccountNotFound = 1;
+    TradingSettingsNotFound = 2;
+    NotEnoughBalance = 3;
+    InvalidBalanceTransferAmount = 4;
+    InvalidCollateral = 5;
+    AccountDuplicate = 6;
 }
 
 enum TradingEngineUpdateBalanceReason{
@@ -140,7 +139,7 @@ message TradingEngineSuccessTransferInfo{
 }
 
 message TransferFundsGrpcResponse{
-    oneof UpdateBalanceResult{
+    oneof TransferFundsResult{
         TradingEngineAccountsErrorCode ErrorCode = 1;
         TradingEngineSuccessTransferInfo TransferInfo = 2;
     }
