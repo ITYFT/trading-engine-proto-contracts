@@ -85,7 +85,6 @@ message GetClientAccountGrpcRequest{
 
 message GetTraderAccountsGrpcRequest{
     string TraderId = 1;
-    string AccountId = 2;
 }
 
 message UpdateAccountGrpcRequest{
@@ -145,7 +144,6 @@ message TransferFundsGrpcResponse{
     }
 }
 
-
 service TradingEngineAccountsService{
     rpc CreateAccount(CreateAccountGrpcRequest) returns (CreateAccountGrpcResponse);
     rpc GetAllAccounts(google.protobuf.Empty) returns (stream TradingEngineAccountGrpcModel);
@@ -156,5 +154,3 @@ service TradingEngineAccountsService{
     rpc TransferFunds(TransferFundsGrpcRequest) returns (TransferFundsGrpcResponse);
     rpc Ping(google.protobuf.Empty) returns (google.protobuf.Empty);
 }
-
-
