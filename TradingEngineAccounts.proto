@@ -94,7 +94,19 @@ message UpdateAccountGrpcRequest{
     optional string TradingGroup = 4;
     optional double Leverage = 5;
     string ProcessId = 6;
+    optional UpdateAccountMetadata Metadata = 7;
 }
+
+enum UpdateAccountMetadataMode{
+    Merge = 0;
+    Update = 1;
+}
+
+message UpdateAccountMetadata{
+    UpdateAccountMetadataMode Mode = 1;
+    map<string, string> Metadata = 2;
+}
+
 
 message UpdateAccountGrpcResponse{
     oneof UpdateResult{
