@@ -1,0 +1,71 @@
+syntax = "proto3";
+package trading_engine;
+import "google/protobuf/empty.proto";
+
+enum TradingEngineOrderGrpType{
+    Market = 0;
+    Stop = 1;
+    Limit = 2;
+}
+
+enum TradingEngineGrpcError{
+    DayOff = 0;
+    NotEnoughBalance = 1;
+}
+
+message TradingEngineOrderGrpcModel{
+    string Id = 1;
+    string TraderId = 2;
+    string AccountId = 3;
+    string AssetPair = 4;
+    string Collateral = 5;
+    double LotsAmount = 6;
+    bool IsBuy = 7;
+    optional double SlPrice = 8;
+    optional double TpPrice = 9;
+    map<string, string> Metadata = 10;
+    TradingEngineOrderGrpType OrderType = 11;
+
+    int64 CreateDate = 12;
+    int64 UpdateData = 13;
+
+    string CreateProcessId = 14;
+    string LastUpdateProcessId = 15;
+
+    optional double DesirePrice = 16;
+}
+
+
+message TradingEnginePlaceOrderGrpcRequest{
+    string TraderId = 1;
+    string AccountId = 2;
+    string AssetPair = 3;
+    double LotsAmount = 5;
+    bool IsBuy = 6;
+    optional double SlPrice = 7;
+    optional double TpPrice = 8;
+    map<string, string> Metadata = 9;
+    TradingEngineOrderGrpType OrderType = 10;
+    optional double DesirePrice = 11;
+    string ProcessId = 12;
+}
+
+message PlaceOrderGrpcResponse{
+    oneof PlaceOrderGrpcResponseResult{
+        TradingEngineOrderGrpcModel Order = 1;
+        TradingEngineGrpcError ErrorMessage = 2;
+    }
+}
+
+message TradingEngineGetAccountOrdersGrpcRequest{
+    string TraderId = 1;
+    string AccountId = 2;
+}
+
+
+service TradingEngineAccountsService{
+    rpc GetAllOrders(google.protobuf.Empty) returns (stream TradingEngineOrderGrpcModel);
+    rpc PlaceOrder(TradingEnginePlaceOrderGrpcRequest) returns (PlaceOrderGrpcResponse);
+    rpc GetAccountOrders(TradingEngineGetAccountOrdersGrpcRequest) returns (stream TradingEngineOrderGrpcModel);
+
+}
