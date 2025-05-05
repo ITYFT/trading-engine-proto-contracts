@@ -9,8 +9,35 @@ enum TradingEngineOrderGrpType{
 }
 
 enum TradingEngineGrpcError{
-    DayOff = 0;
-    NotEnoughBalance = 1;
+    AccountNotFound = 0;
+    DayOff = 1;
+    ReceiverAccountNotFound = 2;
+    TradingGroupNotFound = 3;
+    AssetPairTradingSettingsNotFound = 4;
+    NotEnoughBalance = 5;
+    InvalidBalanceTransferAmount = 6;
+    AssetPairPriceNotFound = 7;
+    CommissionPriceNotFound = 8;
+    MarginPriceNotFound = 9;
+    AssetPairNotFound = 10;
+    ProfitPriceNotFound = 11;
+    AccountTradingDisabled = 12;
+    NoLiquidity = 13;
+    InvalidSl = 14;
+    InvalidTp = 15;
+    PositionNotFound = 16;
+    InvalidOrderPartialExecutionQuantity = 17;
+    TradingInstrumentSettingsNotFound = 18;
+    OperationNotSupportForThisOrderType = 19;
+    OrderNotFound = 20;
+    InvalidCollateral = 21;
+    AccountDuplicate = 22;
+    InvalidLeverage = 23;
+    CollateralNotFoundInGroupSettings = 24;
+    TradingAccountSettingsNotFound = 25;
+    LotsTooLow = 26;
+    LotsTooHigh = 27;
+    InvalidDesirePrice = 28;
 }
 
 message TradingEngineOrderGrpcModel{
