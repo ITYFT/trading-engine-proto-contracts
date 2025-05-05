@@ -63,7 +63,7 @@ message TradingEngineGetAccountOrdersGrpcRequest{
 }
 
 
-service TradingEngineAccountsService{
+service TradingEngineService{
     rpc GetAllOrders(google.protobuf.Empty) returns (stream TradingEngineOrderGrpcModel);
     rpc PlaceOrder(TradingEnginePlaceOrderGrpcRequest) returns (PlaceOrderGrpcResponse);
     rpc GetAccountOrders(TradingEngineGetAccountOrdersGrpcRequest) returns (stream TradingEngineOrderGrpcModel);
