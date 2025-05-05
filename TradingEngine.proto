@@ -89,10 +89,24 @@ message TradingEngineGetAccountOrdersGrpcRequest{
     string AccountId = 2;
 }
 
+message TradingEngineCancelOrderGrpcRequest{
+    string TraderId = 1;
+    string AccountId = 2;
+    string OrderId = 3;
+}
+
+message CancelOrderGrpcResponse{
+    oneof CancelOrderGrpcResponseResult{
+        TradingEngineOrderGrpcModel Order = 1;
+        TradingEngineGrpcError ErrorMessage = 2;
+    }
+}
+
 
 service TradingEngineService{
     rpc GetAllOrders(google.protobuf.Empty) returns (stream TradingEngineOrderGrpcModel);
     rpc PlaceOrder(TradingEnginePlaceOrderGrpcRequest) returns (PlaceOrderGrpcResponse);
     rpc GetAccountOrders(TradingEngineGetAccountOrdersGrpcRequest) returns (stream TradingEngineOrderGrpcModel);
+    rpc CancelOrder(TradingEngineCancelOrderGrpcRequest) returns (CancelOrderGrpcResponse);
 
 }
