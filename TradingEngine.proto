@@ -2,6 +2,17 @@ syntax = "proto3";
 package trading_engine;
 import "google/protobuf/empty.proto";
 
+enum UpdateAccountMetadataMode{
+    Merge = 0;
+    Update = 1;
+}
+
+message TradingEngineUpdateMetadataGrpcModel{
+    UpdateAccountMetadataMode Mode = 1;
+    map<string, string> Metadata = 2;
+}
+
+
 enum TradingEngineOrderGrpType{
     Market = 0;
     Stop = 1;
@@ -102,11 +113,35 @@ message CancelOrderGrpcResponse{
     }
 }
 
+message TradingEngineUpdateOrderGrpcRequest{
+    string TraderId = 1;
+    string AccountId = 2;
+    string PositionId = 3;
+    string ProcessId = 4;
+    optional double TpPrice = 5;
+    optional double SlPrice = 6;
+    optional double DesirePrice = 7;
+    optional TradingEngineUpdateMetadataGrpcModel Metadata = 8;
+}
+
+message TradingEngineUpdateOrderGrpcResponse{
+    oneof UpdatePositionGrpcResponseResult{
+        TradingEngineOrderGrpcModel Order = 1;
+        TradingEngineGrpcError ErrorMessage = 2;
+    }
+}
+
+message ClosePositionGrpcRequest{
+    string TraderId = 1;
+    string AccountId = 2;
+    string PositionId = 3;
+    string ProcessId = 4;
+}
 
 service TradingEngineService{
     rpc GetAllOrders(google.protobuf.Empty) returns (stream TradingEngineOrderGrpcModel);
     rpc PlaceOrder(TradingEnginePlaceOrderGrpcRequest) returns (PlaceOrderGrpcResponse);
     rpc GetAccountOrders(TradingEngineGetAccountOrdersGrpcRequest) returns (stream TradingEngineOrderGrpcModel);
     rpc CancelOrder(TradingEngineCancelOrderGrpcRequest) returns (CancelOrderGrpcResponse);
-
+    rpc UpdateOrder(TradingEngineUpdateOrderGrpcRequest) returns (TradingEngineUpdateOrderGrpcResponse);
 }
