@@ -164,7 +164,7 @@ message TradingEngineActivePositionGrpcModel{
 }
 
 message TradingEngineUpdateOrderGrpcResponse{
-    oneof UpdatePositionGrpcResponseResult{
+    oneof UpdateOrderGrpcResponseResult{
         TradingEngineOrderGrpcModel Order = 1;
         TradingEngineGrpcError ErrorMessage = 2;
     }
