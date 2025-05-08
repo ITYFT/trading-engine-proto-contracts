@@ -147,21 +147,20 @@ message TradingEngineActivePositionGrpcModel{
     optional double SlPrice = 8;
     optional double TpPrice = 9;
     map<string, string> Metadata = 10;
-    TradingEngineOrderGrpType OrderType = 11;
 
-    int64 CreateDate = 12;
-    int64 UpdateData = 13;
+    int64 CreateDate = 11;
+    int64 UpdateData = 12;
 
-    string CreateProcessId = 14;
-    string LastUpdateProcessId = 15;
+    string CreateProcessId = 13;
+    string LastUpdateProcessId = 14;
 
-    TradingEngineBidAskGrpcModel OpenBidAsk = 16;
-    TradingEngineBidAskGrpcModel MarginBidAsk = 17;
-    TradingEngineBidAskGrpcModel ProfitBidAsk = 18;
-    TradingEngineBidAskGrpcModel ActiveBidAsk = 19;
+    TradingEngineBidAskGrpcModel OpenBidAsk = 15;
+    TradingEngineBidAskGrpcModel MarginBidAsk = 16;
+    TradingEngineBidAskGrpcModel ProfitBidAsk = 17;
+    TradingEngineBidAskGrpcModel ActiveBidAsk = 18;
 
-    double Pl = 20;
-    repeated TradingEngineSwapGrpcModel Swaps = 21;
+    double Pl = 19;
+    repeated TradingEngineSwapGrpcModel Swaps = 20;
 }
 
 message TradingEngineUpdateOrderGrpcResponse{
