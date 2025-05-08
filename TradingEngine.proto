@@ -202,6 +202,10 @@ message TradingEngineUpdatePositionGrpcResponse{
     }
 }
 
+message TradingEngineGetAccountPositionsGrpcRequest{
+    string TraderId = 1;
+    string AccountId = 2;
+}
 
 service TradingEngineService{
     rpc GetAllOrders(google.protobuf.Empty) returns (stream TradingEngineOrderGrpcModel);
@@ -210,8 +214,10 @@ service TradingEngineService{
     rpc CancelOrder(TradingEngineCancelOrderGrpcRequest) returns (CancelOrderGrpcResponse);
     rpc UpdateOrder(TradingEngineUpdateOrderGrpcRequest) returns (TradingEngineUpdateOrderGrpcResponse);
 
+    rpc GetAllPositions(google.protobuf.Empty) returns (stream TradingEngineActivePositionGrpcModel);
     rpc ClosePosition(TradingEngineClosePositionGrpcRequest) returns (TradingEngineClosePositionGrpcResponse);
     rpc UpdatePosition(TradingEngineUpdatePositionGrpcRequest) returns (TradingEngineUpdatePositionGrpcResponse);
+    rpc GetAccountPositions(TradingEngineGetAccountPositionsGrpcRequest) returns (stream TradingEngineActivePositionGrpcModel);
 
     rpc Ping(google.protobuf.Empty) returns (google.protobuf.Empty);
 }
