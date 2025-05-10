@@ -161,6 +161,8 @@ message TradingEngineActivePositionGrpcModel{
 
     double Pl = 19;
     repeated TradingEngineSwapGrpcModel Swaps = 20;
+    double Commission = 21;
+    string OrderId = 22;
 }
 
 message TradingEngineUpdateOrderGrpcResponse{
