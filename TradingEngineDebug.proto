@@ -11,8 +11,13 @@ message TradingEngineDebugBidAskGrpcModel{
     string Quote = 6;
 }
 
+message TradingEngineDebugBidAskCrossMatrixGrpcModel{
+    string Data = 1;
+}
+
 service TradingEngineDebugGrpcService{
     rpc GetBidAskSnapshot(google.protobuf.Empty) returns (stream TradingEngineDebugBidAskGrpcModel);
+    rpc GetBidAskCrossMatrix(google.protobuf.Empty) returns (TradingEngineDebugBidAskCrossMatrixGrpcModel);
     rpc ThrowPrice(TradingEngineDebugBidAskGrpcModel) returns (google.protobuf.Empty);
    
     rpc Ping(google.protobuf.Empty) returns (google.protobuf.Empty);
