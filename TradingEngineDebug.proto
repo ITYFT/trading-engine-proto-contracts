@@ -1,0 +1,17 @@
+syntax = "proto3";
+package trading_engine_debug;
+import "google/protobuf/empty.proto";
+
+message TradingEngineDebugGrpcModel{
+    string Id = 1;
+    double Bid = 2;
+    double Ask = 3;
+    uint64 Date = 4;
+}
+
+service TradingEngineDebugGrpcService{
+    rpc GetBidAskSnapshot(google.protobuf.Empty) returns (stream TradingEngineDebugGrpcModel);
+    rpc ThrowPrice(TradingEngineDebugGrpcModel) returns (google.protobuf.Empty);
+   
+    rpc Ping(google.protobuf.Empty) returns (google.protobuf.Empty);
+}
