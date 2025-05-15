@@ -7,6 +7,8 @@ message TradingEngineDebugBidAskGrpcModel{
     double Bid = 2;
     double Ask = 3;
     uint64 Date = 4;
+    string Base = 5;
+    string Quote = 6;
 }
 
 service TradingEngineDebugGrpcService{
