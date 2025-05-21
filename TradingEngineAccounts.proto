@@ -10,6 +10,8 @@ enum TradingEngineAccountsErrorCode{
     InvalidBalanceTransferAmount = 4;
     InvalidCollateral = 5;
     AccountDuplicate = 6;
+    SenderAccountDisabled = 7;
+    RecieverAccountDisabled = 8;
 }
 
 enum TradingEngineUpdateBalanceReason{
