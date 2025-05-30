@@ -15,9 +15,38 @@ message TradingEngineDebugBidAskCrossMatrixGrpcModel{
     string Data = 1;
 }
 
+message DebugEngineSwapGrpcModel{
+    string Id = 1;
+    string AssetPair = 2;
+    string GroupId = 3;
+    double Long = 4;
+    double Short = 5;
+    int32 Anount = 6;
+    bool IsPercent = 7;
+}
+
+message TradingEngineDebugGetSwapsInDateRangeGrpcRequest{
+    int64 From = 1;
+    int64 To = 2;
+}
+
+message TradingEngineDebugSwapsSnapshot{
+    int64 Date = 1;
+    repeated DebugEngineSwapGrpcModel Swaps = 2;
+}
+
+
+message TradingEngineDebugTriggerSwapsInDateRangeGrpcRequest{
+    int64 From = 1;
+    int64 To = 2;
+}
+
 service TradingEngineDebugGrpcService{
     rpc GetBidAskSnapshot(google.protobuf.Empty) returns (stream TradingEngineDebugBidAskGrpcModel);
     rpc GetBidAskCrossMatrix(google.protobuf.Empty) returns (TradingEngineDebugBidAskCrossMatrixGrpcModel);
+    rpc GetSwapsInDateRange(TradingEngineDebugGetSwapsInDateRangeGrpcRequest) returns (stream DebugEngineSwapGrpcModel);
+    rpc GetSwapsSnapshot(google.protobuf.Empty) returns (stream TradingEngineDebugSwapsSnapshot);
+    rpc TriggerSwapsInDateRange(TradingEngineDebugTriggerSwapsInDateRangeGrpcRequest) returns (google.protobuf.Empty);
     rpc ThrowPrice(TradingEngineDebugBidAskGrpcModel) returns (google.protobuf.Empty);
     rpc Ping(google.protobuf.Empty) returns (google.protobuf.Empty);
 }
