@@ -179,6 +179,12 @@ message TradingEngineClosePositionGrpcRequest{
     string PositionId = 3;
     string ProcessId = 4;
 }
+message TradingEngineForceClosePositionGrpcRequest{
+    string TraderId = 1;
+    string AccountId = 2;
+    string PositionId = 3;
+    string ProcessId = 4;
+}
 
 message TradingEngineClosePositionGrpcResponse{
     oneof ClosePositionGrpcResponseResult{
@@ -218,6 +224,7 @@ service TradingEngineService{
 
     rpc GetAllPositions(google.protobuf.Empty) returns (stream TradingEngineActivePositionGrpcModel);
     rpc ClosePosition(TradingEngineClosePositionGrpcRequest) returns (TradingEngineClosePositionGrpcResponse);
+    rpc ForceClosePosition(TradingEngineForceClosePositionGrpcRequest) returns (TradingEngineClosePositionGrpcResponse);
     rpc UpdatePosition(TradingEngineUpdatePositionGrpcRequest) returns (TradingEngineUpdatePositionGrpcResponse);
     rpc GetAccountPositions(TradingEngineGetAccountPositionsGrpcRequest) returns (stream TradingEngineActivePositionGrpcModel);
 
