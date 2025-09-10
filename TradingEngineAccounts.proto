@@ -133,7 +133,7 @@ message UpdateAccountBalanceWithOperationGrpcResponse{
 
 message UpdateBalanceGrpcResult{
     TradingEngineAccountsBalanceOperation BalanceOperation = 1;
-    TradingEngineAccountsBalanceOperation Account = 2;
+    TradingEngineAccountGrpcModel Account = 2;
 }
 
 message UpdateAccountBalanceGrpcRequest{
