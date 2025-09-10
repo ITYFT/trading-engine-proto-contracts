@@ -125,7 +125,7 @@ message UpdateAccountBalanceGrpcResponse{
 }
 
 message UpdateAccountBalanceWithOperationGrpcResponse{
-    oneof UpdateBalanceResult{
+    oneof UpdateBalanceResultWithOperation{
         TradingEngineAccountsErrorCode ErrorCode = 1;
         UpdateBalanceGrpcResult UpdateBalance = 2;
     }
