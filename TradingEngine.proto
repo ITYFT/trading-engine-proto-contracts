@@ -76,6 +76,8 @@ message TradingEngineOrderGrpcModel{
     string LastUpdateProcessId = 15;
 
     optional double DesirePrice = 16;
+
+    bool IsClose = 17;
 }
 
 message TradingEngineBidAskGrpcModel{
@@ -193,7 +195,7 @@ message TradingEngineForceClosePositionGrpcRequest{
 
 message TradingEngineClosePositionGrpcResponse{
     oneof ClosePositionGrpcResponseResult{
-        TradingEngineActivePositionGrpcModel Position = 1;
+        TradingEngineOrderGrpcModel CloseOrder = 1;
         TradingEngineGrpcError ErrorMessage = 2;
     }
 }
