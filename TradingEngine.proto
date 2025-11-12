@@ -80,13 +80,70 @@ message TradingEngineOrderGrpcModel{
     bool IsClose = 17;
 }
 
+message TradingEngineAdminUpdateOrderGrpcModel {
+    string Collateral = 1;
+    double LotsAmount = 2;
+    bool IsBuy = 3;
+    optional double SlPrice = 4;
+    optional double TpPrice = 5;
+    optional double DesirePrice = 6;
+    map<string, string> Metadata = 7;
+    TradingEngineOrderGrpType OrderType = 8;
+
+    int64 CreateDate = 9;
+    int64 UpdateDate = 10;
+
+    string CreateProcessId = 11;
+    string LastUpdateProcessId = 12;
+
+    bool IsClose = 13;
+}
+
+
+message TradingEngineAdminUpdateTradeGrpcModel {
+    string OrderId = 1;
+    string PositionId = 2;
+    double Price = 3;
+    double Pl = 4;
+    double Fee = 5;
+    double LotsAmount = 6;
+    int64 CreateDate = 7;
+    string CreateProcessId = 8;
+    bool IsBuy = 9;
+}
+
+
+message TradingEngineTradeGrpcModel {
+    string Id = 1;
+    string TraderId = 2;
+    string AccountId = 3;
+    string AssetPair = 4;
+    string OrderId = 5;
+    string PositionId = 6;
+    double Price = 7;
+    double Pl = 8;
+    double Fee = 9;
+    double LotsAmount = 10;
+    int64 CreateDate = 11;
+    string CreateProcessId = 12;
+    bool IsBuy = 13;
+}
+
+message TradingEngineAdminBidAskGrpcModel{
+    string AssetPair = 1;
+    double Bid = 2;
+    double Ask = 3;
+    int64 Date = 4;
+    string Base = 5;
+    string Quote = 6;
+}
+
 message TradingEngineBidAskGrpcModel{
     string AssetPair = 1;
     double Bid = 2;
     double Ask = 3;
     int64 Date = 4;
 }
-
 
 message TradingEnginePlaceOrderGrpcRequest{
     string TraderId = 1;
@@ -222,6 +279,187 @@ message TradingEngineGetAccountPositionsGrpcRequest{
     string AccountId = 2;
 }
 
+message TradingEngineAdminActivePositionGrpcModel {
+    string Id = 1;
+    string TraderId = 2;
+    string AccountId = 3;
+    string AssetPair = 4;
+    string Collateral = 5;
+    double LotsAmount = 6;
+    bool IsBuy = 7;
+    optional double SlPrice = 9;
+    optional double TpPrice = 10;
+    map<string, string> Metadata = 11;
+    string OrderId = 12;
+    
+    TradingEngineAdminBidAskGrpcModel MarginBidAsk = 13;
+    TradingEngineAdminBidAskGrpcModel OpenBidAsk = 14;
+    TradingEngineAdminBidAskGrpcModel ProfitBidAsk = 15;
+    TradingEngineAdminBidAskGrpcModel ActiveBidAsk = 16;
+    
+    double Commission = 17;
+    double Pl = 18;
+    repeated TradingEngineSwapGrpcModel Swaps = 19;
+
+    int64 CreateDate = 20;
+    int64 UpdateDate = 21;
+    string CreateProcessId = 22;
+    string LastUpdateProcessId = 23;
+}
+
+message TradingEngineAdminUpdateActivePositionGrpcModel {
+    string Collateral = 5;
+    double LotsAmount = 6;
+    bool IsBuy = 7;
+    optional double SlPrice = 9;
+    optional double TpPrice = 10;
+    map<string, string> Metadata = 11;
+    string OrderId = 12;
+    
+    TradingEngineAdminBidAskGrpcModel MarginBidAsk = 13;
+    TradingEngineAdminBidAskGrpcModel OpenBidAsk = 14;
+    TradingEngineAdminBidAskGrpcModel ProfitBidAsk = 15;
+    TradingEngineAdminBidAskGrpcModel ActiveBidAsk = 16;
+    
+    double Commission = 17;
+    double Pl = 18;
+    repeated TradingEngineSwapGrpcModel Swaps = 19;
+
+    int64 CreateDate = 20;
+    int64 UpdateDate = 21;
+    string CreateProcessId = 22;
+    string LastUpdateProcessId = 23;
+}
+
+
+message TradingEngineAdminUpdateClosedPositionGrpcModel {
+    string Collateral = 5;
+    double LotsAmount = 6;
+    bool IsBuy = 7;
+    optional double SlPrice = 9;
+    optional double TpPrice = 10;
+    map<string, string> Metadata = 11;
+    string OrderId = 12;
+    
+    TradingEngineAdminBidAskGrpcModel MarginBidAsk = 13;
+    TradingEngineAdminBidAskGrpcModel OpenBidAsk = 14;
+    TradingEngineAdminBidAskGrpcModel ProfitBidAsk = 15;
+    TradingEngineAdminBidAskGrpcModel CloseBidAsk = 16;  
+    
+    TradingEngineAdminPositionCloseReason CloseReason = 17;
+    double Commission = 18;
+    double Pl = 19;
+    repeated TradingEngineSwapGrpcModel Swaps = 20;
+    
+    int64 CreateDate = 21;        
+    int64 CloseDate = 22;         
+    string CreateProcessId = 23;
+    string CloseProcessId = 24;   
+}
+
+message TradingEngineAdminClosedPositionGrpcModel {
+    string Id = 1;
+    string TraderId = 2;
+    string AccountId = 3;
+    string AssetPair = 4;
+    string Collateral = 5;
+    double LotsAmount = 6;
+    bool IsBuy = 7;
+    optional double SlPrice = 9;
+    optional double TpPrice = 10;
+    map<string, string> Metadata = 11;
+    string OrderId = 12;
+    
+    TradingEngineAdminBidAskGrpcModel MarginBidAsk = 13;
+    TradingEngineAdminBidAskGrpcModel OpenBidAsk = 14;
+    TradingEngineAdminBidAskGrpcModel ProfitBidAsk = 15;
+    TradingEngineAdminBidAskGrpcModel CloseBidAsk = 16;  
+    
+    TradingEngineAdminPositionCloseReason CloseReason = 17;
+    double Commission = 18;
+    double Pl = 19;
+    repeated TradingEngineSwapGrpcModel Swaps = 20;
+    
+    int64 CreateDate = 21;        
+    int64 CloseDate = 22;         
+    string CreateProcessId = 23;
+    string CloseProcessId = 24;   
+}
+
+enum TradingEngineAdminPositionCloseReason {
+    Manual = 0;
+    Sl = 1;
+    Tp = 2;
+    So = 3;
+    Admin = 4;
+}
+
+message TradingEngineAdminCreatePositionGrpcRequest {
+    oneof Position {
+        TradingEngineAdminActivePositionGrpcModel OpenPosition = 1;
+        TradingEngineAdminClosedPositionGrpcModel ClosedPosition = 2;
+    }
+    TradingEngineOrderGrpcModel OpenOrder = 3;
+    TradingEngineTradeGrpcModel OpenTrade = 4;
+    optional TradingEngineOrderGrpcModel CloseOrder = 5;
+    optional TradingEngineTradeGrpcModel CloseTrade = 6;
+}
+
+message TradingEngineAdminUpdatePositionGrpcRequest {
+    oneof Position {
+        TradingEngineAdminUpdateActivePositionGrpcModel OpenPosition = 1;
+        TradingEngineAdminUpdateClosedPositionGrpcModel ClosedPosition = 2;
+    }
+    TradingEngineAdminUpdateOrderGrpcModel OpenOrder = 3;
+    TradingEngineAdminUpdateTradeGrpcModel OpenTrade = 4;
+    optional TradingEngineAdminUpdateOrderGrpcModel CloseOrder = 5;
+    optional TradingEngineAdminUpdateTradeGrpcModel CloseTrade = 6;
+}
+
+message TradingEngineAdminCreatePositionGrpcResult {
+    oneof Position {
+        TradingEngineAdminActivePositionGrpcModel OpenPosition = 1;
+        TradingEngineAdminClosedPositionGrpcModel ClosedPosition = 2;
+    }
+    TradingEngineOrderGrpcModel Order = 3;
+    TradingEngineTradeGrpcModel Trade = 4;
+}
+
+
+message TradingEngineAdminCreatePositionGrpcResponse {
+    oneof result {
+        TradingEngineAdminCreatePositionGrpcResult Success = 1;
+        TradingEngineGrpcError Error = 2;
+    }
+}
+
+message TradingEngineAdminUpdatePositionGrpcResult {
+    oneof Position {
+        TradingEngineAdminActivePositionGrpcModel OpenPosition = 1;
+        TradingEngineAdminClosedPositionGrpcModel ClosedPosition = 2;
+    }
+    TradingEngineOrderGrpcModel Order = 3;
+    TradingEngineTradeGrpcModel Trade = 4;
+}
+
+message TradingEngineAdminUpdatePositionGrpcResponse {
+    oneof result {
+        TradingEngineAdminUpdatePositionGrpcResult Success = 1;
+        TradingEngineGrpcError Error = 2;
+    }
+}
+
+message TradingEngineAdminDeletePositionGrpcRequest {
+    string PositionId = 1;
+}
+
+message TradingEngineAdminDeletePositionGrpcResponse {
+    oneof result {
+        google.protobuf.Empty Success = 1;
+        TradingEngineGrpcError Error = 2;
+    }
+}
+
 service TradingEngineService{
     rpc GetAllOrders(google.protobuf.Empty) returns (stream TradingEngineOrderGrpcModel);
     rpc PlaceOrder(TradingEnginePlaceOrderGrpcRequest) returns (PlaceOrderGrpcResponse);
@@ -235,6 +473,9 @@ service TradingEngineService{
     rpc ForceClosePosition(TradingEngineForceClosePositionGrpcRequest) returns (TradingEngineClosePositionGrpcResponse);
     rpc UpdatePosition(TradingEngineUpdatePositionGrpcRequest) returns (TradingEngineUpdatePositionGrpcResponse);
     rpc GetAccountPositions(TradingEngineGetAccountPositionsGrpcRequest) returns (stream TradingEngineActivePositionGrpcModel);
+    rpc AdminCreatePosition(TradingEngineAdminCreatePositionGrpcRequest) returns (TradingEngineAdminCreatePositionGrpcResponse);
+    rpc AdminUpdatePosition(TradingEngineAdminUpdatePositionGrpcRequest) returns (TradingEngineAdminUpdatePositionGrpcResponse);
+    rpc AdminDeletePosition(TradingEngineAdminDeletePositionGrpcRequest) returns (TradingEngineAdminDeletePositionGrpcResponse);
 
     rpc Ping(google.protobuf.Empty) returns (google.protobuf.Empty);
 }
