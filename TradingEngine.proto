@@ -287,7 +287,6 @@ message TradingEngineAdminActivePositionGrpcModel {
     string Collateral = 5;
     double LotsAmount = 6;
     bool IsBuy = 7;
-    bool IsAbook = 8;
     optional double SlPrice = 9;
     optional double TpPrice = 10;
     map<string, string> Metadata = 11;
@@ -312,7 +311,6 @@ message TradingEngineAdminUpdateActivePositionGrpcModel {
     string Collateral = 5;
     double LotsAmount = 6;
     bool IsBuy = 7;
-    bool IsAbook = 8;
     optional double SlPrice = 9;
     optional double TpPrice = 10;
     map<string, string> Metadata = 11;
@@ -338,7 +336,6 @@ message TradingEngineAdminUpdateClosedPositionGrpcModel {
     string Collateral = 5;
     double LotsAmount = 6;
     bool IsBuy = 7;
-    bool IsAbook = 8;
     optional double SlPrice = 9;
     optional double TpPrice = 10;
     map<string, string> Metadata = 11;
@@ -368,7 +365,6 @@ message TradingEngineAdminClosedPositionGrpcModel {
     string Collateral = 5;
     double LotsAmount = 6;
     bool IsBuy = 7;
-    bool IsAbook = 8;
     optional double SlPrice = 9;
     optional double TpPrice = 10;
     map<string, string> Metadata = 11;
