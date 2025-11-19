@@ -291,11 +291,11 @@ message TradingEngineAdminActivePositionGrpcModel {
     optional double TpPrice = 10;
     map<string, string> Metadata = 11;
     string OrderId = 12;
-    
-    TradingEngineAdminBidAskGrpcModel MarginBidAsk = 13;
-    TradingEngineAdminBidAskGrpcModel OpenBidAsk = 14;
-    TradingEngineAdminBidAskGrpcModel ProfitBidAsk = 15;
-    TradingEngineAdminBidAskGrpcModel ActiveBidAsk = 16;
+
+    optional TradingEngineAdminBidAskGrpcModel MarginBidAsk = 13;
+    optional TradingEngineAdminBidAskGrpcModel OpenBidAsk = 14;
+    optional TradingEngineAdminBidAskGrpcModel ProfitBidAsk = 15;
+    optional TradingEngineAdminBidAskGrpcModel ActiveBidAsk = 16;
     
     double Commission = 17;
     double Pl = 18;
@@ -315,11 +315,11 @@ message TradingEngineAdminUpdateActivePositionGrpcModel {
     optional double TpPrice = 10;
     map<string, string> Metadata = 11;
     string OrderId = 12;
-    
-    TradingEngineAdminBidAskGrpcModel MarginBidAsk = 13;
-    TradingEngineAdminBidAskGrpcModel OpenBidAsk = 14;
-    TradingEngineAdminBidAskGrpcModel ProfitBidAsk = 15;
-    TradingEngineAdminBidAskGrpcModel ActiveBidAsk = 16;
+
+    optional TradingEngineAdminBidAskGrpcModel MarginBidAsk = 13;
+    optional TradingEngineAdminBidAskGrpcModel OpenBidAsk = 14;
+    optional TradingEngineAdminBidAskGrpcModel ProfitBidAsk = 15;
+    optional TradingEngineAdminBidAskGrpcModel ActiveBidAsk = 16;
     
     double Commission = 17;
     double Pl = 18;
@@ -340,11 +340,11 @@ message TradingEngineAdminUpdateClosedPositionGrpcModel {
     optional double TpPrice = 10;
     map<string, string> Metadata = 11;
     string OrderId = 12;
-    
-    TradingEngineAdminBidAskGrpcModel MarginBidAsk = 13;
-    TradingEngineAdminBidAskGrpcModel OpenBidAsk = 14;
-    TradingEngineAdminBidAskGrpcModel ProfitBidAsk = 15;
-    TradingEngineAdminBidAskGrpcModel CloseBidAsk = 16;  
+
+    optional TradingEngineAdminBidAskGrpcModel MarginBidAsk = 13;
+    optional TradingEngineAdminBidAskGrpcModel OpenBidAsk = 14;
+    optional TradingEngineAdminBidAskGrpcModel ProfitBidAsk = 15;
+    optional TradingEngineAdminBidAskGrpcModel CloseBidAsk = 16;  
     
     TradingEngineAdminPositionCloseReason CloseReason = 17;
     double Commission = 18;
@@ -369,11 +369,11 @@ message TradingEngineAdminClosedPositionGrpcModel {
     optional double TpPrice = 10;
     map<string, string> Metadata = 11;
     string OrderId = 12;
-    
-    TradingEngineAdminBidAskGrpcModel MarginBidAsk = 13;
-    TradingEngineAdminBidAskGrpcModel OpenBidAsk = 14;
-    TradingEngineAdminBidAskGrpcModel ProfitBidAsk = 15;
-    TradingEngineAdminBidAskGrpcModel CloseBidAsk = 16;  
+
+    optional TradingEngineAdminBidAskGrpcModel MarginBidAsk = 13;
+    optional TradingEngineAdminBidAskGrpcModel OpenBidAsk = 14;
+    optional TradingEngineAdminBidAskGrpcModel ProfitBidAsk = 15;
+    optional TradingEngineAdminBidAskGrpcModel CloseBidAsk = 16;  
     
     TradingEngineAdminPositionCloseReason CloseReason = 17;
     double Commission = 18;
