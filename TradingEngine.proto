@@ -81,22 +81,21 @@ message TradingEngineOrderGrpcModel{
 }
 
 message TradingEngineAdminUpdateOrderGrpcModel {
-    string Collateral = 1;
-    double LotsAmount = 2;
-    bool IsBuy = 3;
-    optional double SlPrice = 4;
-    optional double TpPrice = 5;
-    optional double DesirePrice = 6;
-    map<string, string> Metadata = 7;
-    TradingEngineOrderGrpType OrderType = 8;
+    double LotsAmount = 1;
+    bool IsBuy = 2;
+    optional double SlPrice = 3;
+    optional double TpPrice = 4;
+    optional double DesirePrice = 5;
+    map<string, string> Metadata = 6;
+    TradingEngineOrderGrpType OrderType = 7;
+    int64 CreateDate = 8;
+    int64 UpdateDate = 9;
 
-    int64 CreateDate = 9;
-    int64 UpdateDate = 10;
-
-    string CreateProcessId = 11;
-    string LastUpdateProcessId = 12;
-
-    bool IsClose = 13;
+    string CreateProcessId = 10;
+    string LastUpdateProcessId = 11;
+    bool IsClose = 12;
+    string OrderId = 13;
+    string TradeId = 14;
 }
 
 
@@ -110,6 +109,7 @@ message TradingEngineAdminUpdateTradeGrpcModel {
     int64 CreateDate = 7;
     string CreateProcessId = 8;
     bool IsBuy = 9;
+    string TradeId = 10;
 }
 
 
@@ -284,7 +284,7 @@ message TradingEngineAdminActivePositionGrpcModel {
     string TraderId = 2;
     string AccountId = 3;
     string AssetPair = 4;
-    string Collateral = 5;
+    optional string Collateral = 5;
     double LotsAmount = 6;
     bool IsBuy = 7;
     optional double SlPrice = 9;
@@ -308,53 +308,59 @@ message TradingEngineAdminActivePositionGrpcModel {
 }
 
 message TradingEngineAdminUpdateActivePositionGrpcModel {
-    string Collateral = 5;
-    double LotsAmount = 6;
-    bool IsBuy = 7;
-    optional double SlPrice = 9;
-    optional double TpPrice = 10;
-    map<string, string> Metadata = 11;
-    string OrderId = 12;
+    double LotsAmount = 1;
+    bool IsBuy = 2;
+    optional double SlPrice = 3;
+    optional double TpPrice = 4;
+    map<string, string> Metadata = 5;
+    string OrderId = 6;
 
-    optional TradingEngineAdminBidAskGrpcModel MarginBidAsk = 13;
-    optional TradingEngineAdminBidAskGrpcModel OpenBidAsk = 14;
-    optional TradingEngineAdminBidAskGrpcModel ProfitBidAsk = 15;
-    optional TradingEngineAdminBidAskGrpcModel ActiveBidAsk = 16;
+    optional TradingEngineAdminBidAskGrpcModel MarginBidAsk = 7;
+    optional TradingEngineAdminBidAskGrpcModel OpenBidAsk = 8;
+    optional TradingEngineAdminBidAskGrpcModel ProfitBidAsk = 9;
+    optional TradingEngineAdminBidAskGrpcModel ActiveBidAsk = 10;
     
-    double Commission = 17;
-    double Pl = 18;
-    repeated TradingEngineSwapGrpcModel Swaps = 19;
-
-    int64 CreateDate = 20;
-    int64 UpdateDate = 21;
-    string CreateProcessId = 22;
-    string LastUpdateProcessId = 23;
+    double Commission = 11;
+    double Pl = 12;
+    repeated TradingEngineSwapGrpcModel Swaps = 13;
+    int64 CreateDate = 14;
+    int64 UpdateDate = 15;
+    string CreateProcessId = 16;
+    string LastUpdateProcessId = 17;
+    string PositionId = 18;
+    string TradeId = 19;
 }
 
 
 message TradingEngineAdminUpdateClosedPositionGrpcModel {
-    string Collateral = 5;
-    double LotsAmount = 6;
-    bool IsBuy = 7;
-    optional double SlPrice = 9;
-    optional double TpPrice = 10;
-    map<string, string> Metadata = 11;
-    string OrderId = 12;
+    double LotsAmount = 1;
+    bool IsBuy = 2;
+    optional double SlPrice = 3;
+    optional double TpPrice = 4;
+    map<string, string> Metadata = 5;
+    string OpenOrderId = 6;
 
-    optional TradingEngineAdminBidAskGrpcModel MarginBidAsk = 13;
-    optional TradingEngineAdminBidAskGrpcModel OpenBidAsk = 14;
-    optional TradingEngineAdminBidAskGrpcModel ProfitBidAsk = 15;
-    optional TradingEngineAdminBidAskGrpcModel CloseBidAsk = 16;  
+    optional TradingEngineAdminBidAskGrpcModel MarginBidAsk = 7;
+    optional TradingEngineAdminBidAskGrpcModel OpenBidAsk = 8;
+    optional TradingEngineAdminBidAskGrpcModel ProfitBidAsk = 9;
+    optional TradingEngineAdminBidAskGrpcModel CloseBidAsk = 10;  
     
-    TradingEngineAdminPositionCloseReason CloseReason = 17;
-    double Commission = 18;
-    double Pl = 19;
-    repeated TradingEngineSwapGrpcModel Swaps = 20;
+    TradingEngineAdminPositionCloseReason CloseReason = 11;
+    double Commission = 12;
+    double Pl = 13;
+    repeated TradingEngineSwapGrpcModel Swaps = 14;
     
-    int64 CreateDate = 21;        
-    int64 CloseDate = 22;         
-    string CreateProcessId = 23;
-    string CloseProcessId = 24;   
+    int64 CreateDate = 15;        
+    int64 CloseDate = 16;         
+    string CreateProcessId = 17;
+    string CloseProcessId = 18;  
+    string PositionId = 19; 
+    string CloseOrderId = 20;
+    string CloseTradeId = 21;
+    string OpenTradeId = 22;
+    string TraderId = 23;
+    string AccountId = 24;
+    string AssetPair = 25;
 }
 
 message TradingEngineAdminClosedPositionGrpcModel {
@@ -362,7 +368,7 @@ message TradingEngineAdminClosedPositionGrpcModel {
     string TraderId = 2;
     string AccountId = 3;
     string AssetPair = 4;
-    string Collateral = 5;
+    optional string Collateral = 5;
     double LotsAmount = 6;
     bool IsBuy = 7;
     optional double SlPrice = 9;
