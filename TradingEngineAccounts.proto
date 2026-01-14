@@ -71,6 +71,7 @@ message CreateAccountGrpcRequest{
     string ProcessId = 5;
     string TradingGroup = 6;
     map<string, string> Metadata = 7;
+    optional bool TradingDisabled = 8;
 }
 
 message CreateAccountGrpcResponse{
