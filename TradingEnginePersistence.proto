@@ -62,6 +62,7 @@ message TradingEnginePositionPersistenceGrpcModel {
 
   string CreateProcessId = 22;
   string UpdateProcessId = 23;
+  optional double TrailingSlOffset = 24;
 }
 
 enum OrderType {

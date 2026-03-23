@@ -54,6 +54,7 @@ enum TradingEngineGrpcError{
     LotsTooLow = 26;
     LotsTooHigh = 27;
     InvalidDesirePrice = 28;
+    TrailingSlRequiresSlPrice = 29;
 }
 
 message TradingEngineOrderGrpcModel{
@@ -157,6 +158,7 @@ message TradingEnginePlaceOrderGrpcRequest{
     TradingEngineOrderGrpType OrderType = 10;
     optional double DesirePrice = 11;
     string ProcessId = 12;
+    bool IsTrailingSl = 13;
 }
 
 message PlaceOrderGrpcResponse{
@@ -228,6 +230,7 @@ message TradingEngineActivePositionGrpcModel{
     repeated TradingEngineSwapGrpcModel Swaps = 20;
     double Commission = 21;
     string OrderId = 22;
+    optional double TrailingSlOffset = 23;
 }
 
 message TradingEngineUpdateOrderGrpcResponse{
@@ -265,6 +268,7 @@ message TradingEngineUpdatePositionGrpcRequest{
     optional double TpPrice = 5;
     optional double SlPrice = 6;
     optional TradingEngineUpdateMetadataGrpcModel Metadata = 7;
+    optional bool IsTrailingSl = 8;
 }
 
 message TradingEngineUpdatePositionGrpcResponse{
@@ -305,6 +309,7 @@ message TradingEngineAdminActivePositionGrpcModel {
     int64 UpdateDate = 21;
     string CreateProcessId = 22;
     string LastUpdateProcessId = 23;
+    optional double TrailingSlOffset = 24;
 }
 
 message TradingEngineAdminUpdateActivePositionGrpcModel {
@@ -329,6 +334,7 @@ message TradingEngineAdminUpdateActivePositionGrpcModel {
     string LastUpdateProcessId = 17;
     string PositionId = 18;
     string TradeId = 19;
+    optional double TrailingSlOffset = 20;
 }
 
 
