@@ -103,7 +103,7 @@ message TradingEngineOrderPersistenceGrpcModel {
   string UpdateProcessId = 17;
 
   optional double DesiredPrice = 18;
-  bool IsClose = 19;
+  bool IsTrailingSl = 19;
 }
 
 enum TradingAccountStatus {

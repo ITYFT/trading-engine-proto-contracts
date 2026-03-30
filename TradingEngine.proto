@@ -55,6 +55,7 @@ enum TradingEngineGrpcError{
     LotsTooHigh = 27;
     InvalidDesirePrice = 28;
     TrailingSlRequiresSlPrice = 29;
+    InvalidTrailingSlOffset = 30;
 }
 
 message TradingEngineOrderGrpcModel{
@@ -79,6 +80,7 @@ message TradingEngineOrderGrpcModel{
     optional double DesirePrice = 16;
 
     bool IsClose = 17;
+    bool IsTrailingSl = 18;
 }
 
 message TradingEngineAdminUpdateOrderGrpcModel {
@@ -97,6 +99,7 @@ message TradingEngineAdminUpdateOrderGrpcModel {
     bool IsClose = 12;
     string OrderId = 13;
     string TradeId = 14;
+    bool IsTrailingSl = 15;
 }
 
 
