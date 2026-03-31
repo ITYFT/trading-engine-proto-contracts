@@ -312,7 +312,7 @@ message TradingEngineAdminActivePositionGrpcModel {
     int64 UpdateDate = 21;
     string CreateProcessId = 22;
     string LastUpdateProcessId = 23;
-    optional double TrailingSlOffset = 24;
+    bool IsTrailingSl = 24;
 }
 
 message TradingEngineAdminUpdateActivePositionGrpcModel {
@@ -337,7 +337,7 @@ message TradingEngineAdminUpdateActivePositionGrpcModel {
     string LastUpdateProcessId = 17;
     string PositionId = 18;
     string TradeId = 19;
-    optional double TrailingSlOffset = 20;
+    bool IsTrailingSl = 20;
 }
 
 
