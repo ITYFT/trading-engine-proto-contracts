@@ -233,7 +233,7 @@ message TradingEngineActivePositionGrpcModel{
     repeated TradingEngineSwapGrpcModel Swaps = 20;
     double Commission = 21;
     string OrderId = 22;
-    optional double TrailingSlOffset = 23;
+    bool IsTrailingSl = 23;
 }
 
 message TradingEngineUpdateOrderGrpcResponse{
