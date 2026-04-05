@@ -464,11 +464,22 @@ message TradingEngineAdminUpdatePositionGrpcResponse {
     }
 }
 
-message TradingEngineAdminDeletePositionGrpcRequest {
+message TradingEngineAdminDeleteActivePositionGrpcRequest {
     string PositionId = 1;
 }
 
-message TradingEngineAdminDeletePositionGrpcResponse {
+message TradingEngineAdminDeleteActivePositionGrpcResponse {
+    oneof result {
+        google.protobuf.Empty Success = 1;
+        TradingEngineGrpcError Error = 2;
+    }
+}
+
+message TradingEngineAdminDeleteClosedPositionGrpcRequest {
+    TradingEngineAdminClosedPositionGrpcModel ClosedPosition = 1;
+}
+
+message TradingEngineAdminDeleteClosedPositionGrpcResponse {
     oneof result {
         google.protobuf.Empty Success = 1;
         TradingEngineGrpcError Error = 2;
@@ -490,7 +501,8 @@ service TradingEngineService{
     rpc GetAccountPositions(TradingEngineGetAccountPositionsGrpcRequest) returns (stream TradingEngineActivePositionGrpcModel);
     rpc AdminCreatePosition(TradingEngineAdminCreatePositionGrpcRequest) returns (TradingEngineAdminCreatePositionGrpcResponse);
     rpc AdminUpdatePosition(TradingEngineAdminUpdatePositionGrpcRequest) returns (TradingEngineAdminUpdatePositionGrpcResponse);
-    rpc AdminDeletePosition(TradingEngineAdminDeletePositionGrpcRequest) returns (TradingEngineAdminDeletePositionGrpcResponse);
+    rpc AdminDeleteActivePosition(TradingEngineAdminDeleteActivePositionGrpcRequest) returns (TradingEngineAdminDeleteActivePositionGrpcResponse);
+    rpc AdminDeleteClosedPosition(TradingEngineAdminDeleteClosedPositionGrpcRequest) returns (TradingEngineAdminDeleteClosedPositionGrpcResponse);
 
     rpc Ping(google.protobuf.Empty) returns (google.protobuf.Empty);
 }
