@@ -234,6 +234,7 @@ message TradingEngineActivePositionGrpcModel{
     double Commission = 21;
     string OrderId = 22;
     bool IsTrailingSl = 23;
+    optional double TrailingSlOffset = 24;
 }
 
 message TradingEngineUpdateOrderGrpcResponse{
