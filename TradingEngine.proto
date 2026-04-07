@@ -204,6 +204,7 @@ message TradingEngineUpdateOrderGrpcRequest{
     optional double DesirePrice = 7;
     optional TradingEngineUpdateMetadataGrpcModel Metadata = 8;
     optional double LotsAmount = 9;
+    optional bool IsTrailingSl = 10;
 }
 
 message TradingEngineActivePositionGrpcModel{
