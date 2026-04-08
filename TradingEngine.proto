@@ -56,6 +56,11 @@ enum TradingEngineGrpcError{
     InvalidDesirePrice = 28;
     TrailingSlRequiresSlPrice = 29;
     InvalidTrailingSlOffset = 30;
+    BelowMinLot = 31;
+    InvalidLotStep = 32;
+    RateLimitExceeded = 33;
+    PositionInCloseQueue = 34;
+    ABookNotSupported = 35;
 }
 
 message TradingEngineOrderGrpcModel{
@@ -236,6 +241,8 @@ message TradingEngineActivePositionGrpcModel{
     string OrderId = 22;
     bool IsTrailingSl = 23;
     optional double TrailingSlOffset = 24;
+    optional double RealizedPl = 25;
+    double InitialLotsAmount = 26;
 }
 
 message TradingEngineUpdateOrderGrpcResponse{
@@ -261,6 +268,21 @@ message TradingEngineForceClosePositionGrpcRequest{
 message TradingEngineClosePositionGrpcResponse{
     oneof ClosePositionGrpcResponseResult{
         TradingEngineOrderGrpcModel CloseOrder = 1;
+        TradingEngineGrpcError ErrorMessage = 2;
+    }
+}
+
+message TradingEnginePartialClosePositionGrpcRequest{
+    string TraderId = 1;
+    string AccountId = 2;
+    string PositionId = 3;
+    double LotsToClose = 4;
+    string ProcessId = 5;
+}
+
+message TradingEnginePartialClosePositionGrpcResponse{
+    oneof PartialClosePositionGrpcResponseResult{
+        TradingEngineActivePositionGrpcModel Position = 1;
         TradingEngineGrpcError ErrorMessage = 2;
     }
 }
@@ -315,6 +337,8 @@ message TradingEngineAdminActivePositionGrpcModel {
     string CreateProcessId = 22;
     string LastUpdateProcessId = 23;
     bool IsTrailingSl = 24;
+    optional double RealizedPl = 25;
+    double InitialLotsAmount = 26;
 }
 
 message TradingEngineAdminUpdateActivePositionGrpcModel {
@@ -409,6 +433,7 @@ enum TradingEngineAdminPositionCloseReason {
     Tp = 2;
     So = 3;
     Admin = 4;
+    PartialClose = 5;
 }
 
 message TradingEngineAdminCreatePositionGrpcRequest {
@@ -499,6 +524,7 @@ service TradingEngineService{
     rpc GetAllPositions(google.protobuf.Empty) returns (stream TradingEngineActivePositionGrpcModel);
     rpc ClosePosition(TradingEngineClosePositionGrpcRequest) returns (TradingEngineClosePositionGrpcResponse);
     rpc ForceClosePosition(TradingEngineForceClosePositionGrpcRequest) returns (TradingEngineClosePositionGrpcResponse);
+    rpc PartialClosePosition(TradingEnginePartialClosePositionGrpcRequest) returns (TradingEnginePartialClosePositionGrpcResponse);
     rpc UpdatePosition(TradingEngineUpdatePositionGrpcRequest) returns (TradingEngineUpdatePositionGrpcResponse);
     rpc GetAccountPositions(TradingEngineGetAccountPositionsGrpcRequest) returns (stream TradingEngineActivePositionGrpcModel);
     rpc AdminCreatePosition(TradingEngineAdminCreatePositionGrpcRequest) returns (TradingEngineAdminCreatePositionGrpcResponse);

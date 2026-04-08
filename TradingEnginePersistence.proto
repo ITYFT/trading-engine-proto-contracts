@@ -3,6 +3,16 @@ package trading_engine_persistence;
 
 import "google/protobuf/empty.proto";
 
+enum TradeCloseReason {
+  Open = 0;
+  Manual = 1;
+  Sl = 2;
+  Tp = 3;
+  So = 4;
+  Admin = 5;
+  PartialClose = 6;
+}
+
 message TradingEngineTradePersistenceGrpcModel {
   string Id = 1;
   string TraderId = 2;
@@ -17,6 +27,8 @@ message TradingEngineTradePersistenceGrpcModel {
   int64 CreateDate = 11;
   string CreateProcessId = 12;
   bool IsBuy = 13;
+  double Swap = 14;
+  optional TradeCloseReason CloseReason = 15;
 }
 
 message TradingEngineBidAskGrpcModel {
@@ -63,6 +75,8 @@ message TradingEnginePositionPersistenceGrpcModel {
   string CreateProcessId = 22;
   string UpdateProcessId = 23;
   optional double TrailingSlOffset = 24;
+  optional double RealizedPl = 25;
+  double InitialLotsAmount = 26;
 }
 
 enum OrderType {
