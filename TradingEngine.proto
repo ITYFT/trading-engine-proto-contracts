@@ -61,6 +61,9 @@ enum TradingEngineGrpcError{
     RateLimitExceeded = 33;
     PositionInCloseQueue = 34;
     ABookNotSupported = 35;
+    PartialCloseRedirectedToFullClose = 36;
+    AccountUnderStopOut = 37;
+    RemainingLotsBelowMinimum = 38;
 }
 
 message TradingEngineOrderGrpcModel{
