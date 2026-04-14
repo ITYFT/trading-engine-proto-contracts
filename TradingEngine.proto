@@ -56,13 +56,10 @@ enum TradingEngineGrpcError{
     InvalidDesirePrice = 28;
     TrailingSlRequiresSlPrice = 29;
     InvalidTrailingSlOffset = 30;
-    BelowMinLot = 31;
-    InvalidLotStep = 32;
-    RateLimitExceeded = 33;
-    PositionInCloseQueue = 34;
     ABookNotSupported = 35;
     AccountUnderStopOut = 37;
     RemainingLotsBelowMinimum = 38;
+    LotsToCloseExceedsCurrent = 39;
 }
 
 message TradingEngineOrderGrpcModel{
