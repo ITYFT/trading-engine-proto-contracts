@@ -61,7 +61,6 @@ enum TradingEngineGrpcError{
     RateLimitExceeded = 33;
     PositionInCloseQueue = 34;
     ABookNotSupported = 35;
-    PartialCloseRedirectedToFullClose = 36;
     AccountUnderStopOut = 37;
     RemainingLotsBelowMinimum = 38;
 }
@@ -260,6 +259,7 @@ message TradingEngineClosePositionGrpcRequest{
     string AccountId = 2;
     string PositionId = 3;
     string ProcessId = 4;
+    optional double LotsToClose = 5;
 }
 message TradingEngineForceClosePositionGrpcRequest{
     string TraderId = 1;
@@ -275,20 +275,6 @@ message TradingEngineClosePositionGrpcResponse{
     }
 }
 
-message TradingEnginePartialClosePositionGrpcRequest{
-    string TraderId = 1;
-    string AccountId = 2;
-    string PositionId = 3;
-    double LotsToClose = 4;
-    string ProcessId = 5;
-}
-
-message TradingEnginePartialClosePositionGrpcResponse{
-    oneof PartialClosePositionGrpcResponseResult{
-        TradingEngineActivePositionGrpcModel Position = 1;
-        TradingEngineGrpcError ErrorMessage = 2;
-    }
-}
 
 message TradingEngineUpdatePositionGrpcRequest{
     string TraderId = 1;
@@ -527,7 +513,6 @@ service TradingEngineService{
     rpc GetAllPositions(google.protobuf.Empty) returns (stream TradingEngineActivePositionGrpcModel);
     rpc ClosePosition(TradingEngineClosePositionGrpcRequest) returns (TradingEngineClosePositionGrpcResponse);
     rpc ForceClosePosition(TradingEngineForceClosePositionGrpcRequest) returns (TradingEngineClosePositionGrpcResponse);
-    rpc PartialClosePosition(TradingEnginePartialClosePositionGrpcRequest) returns (TradingEnginePartialClosePositionGrpcResponse);
     rpc UpdatePosition(TradingEngineUpdatePositionGrpcRequest) returns (TradingEngineUpdatePositionGrpcResponse);
     rpc GetAccountPositions(TradingEngineGetAccountPositionsGrpcRequest) returns (stream TradingEngineActivePositionGrpcModel);
     rpc AdminCreatePosition(TradingEngineAdminCreatePositionGrpcRequest) returns (TradingEngineAdminCreatePositionGrpcResponse);
