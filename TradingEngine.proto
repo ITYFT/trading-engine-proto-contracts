@@ -410,10 +410,12 @@ message TradingEngineAdminClosedPositionGrpcModel {
     double Pl = 19;
     repeated TradingEngineSwapGrpcModel Swaps = 20;
     
-    int64 CreateDate = 21;        
-    int64 CloseDate = 22;         
+    int64 CreateDate = 21;
+    int64 CloseDate = 22;
     string CreateProcessId = 23;
-    string CloseProcessId = 24;   
+    string CloseProcessId = 24;
+    optional double RealizedPl = 25;
+    double InitialLotsAmount = 26;
 }
 
 enum TradingEngineAdminPositionCloseReason {
