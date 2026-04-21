@@ -241,6 +241,7 @@ message TradingEngineActivePositionGrpcModel{
     optional double TrailingSlOffset = 24;
     optional double RealizedPl = 25;
     double InitialLotsAmount = 26;
+    optional double RealizedSwap = 27;
 }
 
 message TradingEngineUpdateOrderGrpcResponse{
@@ -324,6 +325,7 @@ message TradingEngineAdminActivePositionGrpcModel {
     bool IsTrailingSl = 24;
     optional double RealizedPl = 25;
     double InitialLotsAmount = 26;
+    optional double RealizedSwap = 27;
 }
 
 message TradingEngineAdminUpdateActivePositionGrpcModel {
